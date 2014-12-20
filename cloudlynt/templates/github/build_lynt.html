@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Cloud Lynt</title>
+    <title>Cloud Lynt - {{username}} / {{repo}}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -18,10 +18,21 @@
       .lint-error .message{
           padding: 6px 6px;
       }
+
+      .site-title {
+      font-size: 40px;
+      font-weight: bold;
+      padding-bottom: 10px;
+      }
+
     </style>
   </head>
   <body>
     <div class="container">
+      <div class="">
+        <p class="text-center site-title">CLOUDLYNT</p>
+      </div>
+      <hr>
       {% if not lint_errors %}
       <div class="jumbotron">
         Yay, There are no lint errors!
