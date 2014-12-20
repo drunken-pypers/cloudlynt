@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <title>Cloud Lynt</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+      .numbers-header {
+      font-size: 12px;
+      font-weight: bold;
+      }
+
+      .numbers {
+      font-size: 44px;
+      }
+
+      .lint-error .message{
+          padding: 6px 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      {% if not lint_errors %}
+      <div class="jumbotron">
+        Yay, There are no lint errors!
+      </div>
+      {% else %}
+      <div class="row">
+        <div class="col-md-2 numbers-header bg-info">
+          Total
+        </div>
+        <div class="col-md-2 numbers-header bg-danger">
+          Errors
+        </div>
+        <div class="col-md-2 numbers-header bg-warning">
+          Warnings
+        </div>
+      </div>
+      <div class="row" style="margin-bottom:20px">
+        <div class="col-md-2 numbers bg-info">
+          {{ data.meta.total }}
+        </div>
+        <div class="col-md-2 numbers bg-danger">
+          {{ data.meta.errors_and_warnings.errors }}
+        </div>
+        <div class="col-md-2 numbers bg-warning">
+          {{ data.meta.errors_and_warnings.warnings }}
+        </div>
+      </div>
+
+        {% for item in data.tokenized_output %}
+        <div class="lint-error row">
+          {% if item.error_code|slice:":1" == 'E' %}
+          <div class="message bg-danger">
+            {% else %}
+          <div class="message bg-warning">
+            {% endif %}
+
+            {{ item.error_message }} - Line: {{ item.line_no }}
+          </div>
+          <div>
+            <script src="http://gist-it.appspot.com/github/{{ username }}/{{ repo }}/blob/master/{{ item.file_path }}?slice={{item.line_no|add:"-1" }}:{{item.line_no|add:"1" }}&footer=no"></script>
+          </div>
+        </div>
+        {% endfor %}
+
+          {% endif %}
+    </div>
+  </body>
+</html>
