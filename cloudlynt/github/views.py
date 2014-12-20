@@ -15,9 +15,13 @@ def download_repo(username, repo):
     url = _generate_tar_url(username, repo)
     dir_path = "/tmp/{}".format(uuid.uuid4().hex)
     os.mkdir(dir_path)
-    subprocess.call('curl -L {} | tar -xz -C {}'.format(
+    return_code = subprocess.call('curl -L {} | tar -xz -C {}'.format(
         url, dir_path), shell=True)
-    return "{}/{}-master".format(dir_path, repo)
+
+    if not return_code:
+        return "{}/{}-master".format(dir_path, repo)
+    else:
+        return False
 
 
 def run_flake_on_repo(dir_path):
@@ -38,5 +42,8 @@ def run_flake_on_repo(dir_path):
 
 def build_lynt(request, username, repo):
     dir_path = download_repo(username, repo)
+    if not dir_path:
+        return HttpResponse("LOL", status=404)
+
     result = run_flake_on_repo(dir_path)
     return HttpResponse(result)
