@@ -58,7 +58,7 @@
           <div class="message bg-warning">
             {% endif %}
 
-            {{ item.error_message }} - Line: {{ item.line_no }}
+           <a target="_blank" href="http://github.com/{{ username }}/{{ repo }}/blob/master/{{ item.file_path }}#L{{item.line_no}}">{{ item.file_path }}:{{ item.line_no }}</a> - {{ item.error_message }}
           </div>
           <div>
             <script src="http://gist-it.appspot.com/github/{{ username }}/{{ repo }}/blob/master/{{ item.file_path }}?slice={{item.line_no|add:"-1" }}:{{item.line_no|add:"1" }}&footer=no"></script>
