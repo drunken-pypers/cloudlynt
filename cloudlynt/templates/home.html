@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Cloud Lynt</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <form class="form-github-repo" method="post" role="form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <h2 class="page-header" style="color:rgb(123, 118, 118);">Please enter your github repo details</h2>
+        <div class="form-group row">
+          <div class="col-xs-3">
+            <input type="text" class="form-control" name="github_user" placeholder="Username/Organization" id="github-username" required autofocus>
+          </div>
+          <div class="col-xs-3">
+            <input type="text" class="form-control" name="github_repo" placeholder="Repository" id="github-repo" required autofocus>
+          </div>
+          <div class="col-xs-3" style="margin-top: 0px">
+            <button class="btn btn-primary btn-block" type="submit">Lint Me</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </body>
+</html>
