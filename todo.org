@@ -1,0 +1,6 @@
+* Create Database
+  * schema:
+  * tables:
+* Setup background task to run linting
+* Github hook
+* Commit base urls to view lint report.
