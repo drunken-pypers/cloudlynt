@@ -1,4 +1,4 @@
 Django==1.7.1
 flake8==2.1.0
-gunicorn==19
+gunicorn==19.5.0
 pyflakes==0.8.1
